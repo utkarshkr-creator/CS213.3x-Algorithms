@@ -1,0 +1,20 @@
+#include "header.h"
+#include<iostream>
+#include <cstdlib>
+#define EPSILON 0.001
+using namespace std;
+
+double NewtonRaphsonStudent::NewtonRaphson(func Function, func Derivative, double start, double accu)
+{
+        double h = Function(start) / Derivative(start);
+    while (abs(h) >= EPSILON)
+    {
+      h = Function(start) / Derivative(start);
+  
+        start = start - h;
+    }
+ 
+    
+
+    return start;
+}
