@@ -1,0 +1,109 @@
+#include "header.h"
+#include<iostream>
+#include<vector>
+#include<queue>
+using namespace std;
+/*
+  Do not remove the "header.h" file.
+*/
+
+//-----Include any additional required headers here-----
+
+//-----End of additional headers-----
+
+//-----Add new functions here(if any)-----
+
+
+//-----New functions end here-----
+
+/* You need to write the implementation of the given function.
+             ( You may write any additional helper functions you want in the specified region only.
+               Do not change the signature of the function already given)
+               For detailed explanation of the question refer to the Description part) 
+*/
+
+void move(int coordinateX, int coordinateY, queue<int> & Qx, queue<int> & Qy, vector<vector<char> > & graph , vector<vector<bool> > & visited , vector <char> & answer)
+{   
+    
+  queue<int>x;
+  queue<int>y;
+
+  x.push(coordinateX);y.push(coordinateY);
+   // cout<<"queue data__________"<<endl;
+  int size=10000;
+
+  while(!x.empty()  && size--){
+   /* queue<int>x1=x;queue<int>y1=y;
+      while(!x1.empty()){
+        cout<<x1.front()<<","<<y1.front()<<endl;
+        x1.pop(); y1.pop();
+      }
+      cout<<endl;*/
+
+
+  coordinateX=x.front();
+  coordinateY=y.front();
+ 
+  if(graph[coordinateX][coordinateY]=='t' && visited[coordinateX][coordinateY]==false){
+    visited[coordinateX][coordinateY]=true;
+    size=x.size();
+    answer.push_back(graph[coordinateX][coordinateY]);
+  }
+  else{
+    if(graph[coordinateX][coordinateY]!='x'  && visited[coordinateX][coordinateY]==false){
+      visited[coordinateX][coordinateY]=true;
+      answer.push_back(graph[coordinateX][coordinateY]);
+    //  cout<<graph[coordinateX][coordinateY]<<endl;
+    }
+   if(coordinateY+1 <10 && graph[coordinateX][coordinateY+1]!='x' && visited[coordinateX][coordinateY+1]==false){
+     if(graph[coordinateX][coordinateY+1]=='t'){
+        size=x.size()-1;
+         
+      }
+      else {y.push(coordinateY+1); x.push(coordinateX);}
+      visited[coordinateX][coordinateY+1]=true;
+      answer.push_back(graph[coordinateX][coordinateY+1]);
+     // cout<<graph[coordinateX][coordinateY+1]<<endl;
+      
+    }
+    if(coordinateX+1 <10 && graph[coordinateX+1][coordinateY]!='x' && visited[coordinateX+1][coordinateY]==false){
+      if(graph[coordinateX+1][coordinateY]=='t'){
+         size=x.size()-1;
+         
+      }
+      else {y.push(coordinateY); x.push(coordinateX+1);}
+      visited[coordinateX+1][coordinateY]=true;
+      answer.push_back(graph[coordinateX+1][coordinateY]);
+     // cout<<graph[coordinateX+1][coordinateY]<<endl;
+       
+    }
+    if(coordinateY-1 >=0 && graph[coordinateX][coordinateY-1]!='x' && visited[coordinateX][coordinateY-1]==false){
+      if(graph[coordinateX][coordinateY-1]=='t'){
+        size=x.size()-1;
+         
+      }
+     else { y.push(coordinateY-1); x.push(coordinateX);}
+      visited[coordinateX][coordinateY-1]=true;
+      answer.push_back(graph[coordinateX][coordinateY-1]);
+    //  cout<<graph[coordinateX][coordinateY-1]<<endl;
+      
+    }
+    if( coordinateX-1 >=0 && graph[coordinateX-1][coordinateY]!='x' && visited[coordinateX-1][coordinateY]==false){
+     if(graph[coordinateX-1][coordinateY]=='t'){
+        size=x.size()-1;
+        
+      }
+      else {y.push(coordinateY); x.push(coordinateX-1);}
+      visited[coordinateX-1][coordinateY]=true;
+      answer.push_back(graph[coordinateX-1][coordinateY]);
+    //  cout<<graph[coordinateX-1][coordinateY]<<endl;
+       
+    }
+
+  }
+  x.pop();
+  y.pop();
+}
+	
+
+}
